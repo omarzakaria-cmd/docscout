@@ -19,7 +19,7 @@ class PdfWebTests(unittest.TestCase):
         self.assertIn(b"example.pdf", response.data)
         self.assertIn(b"Page 2", response.data)
         self.assertNotIn(b"Line 2", response.data)
-        self.assertIn(b"Python appears on this page.", response.data)
+        self.assertIn(b"<mark>Python</mark> appears on this page.", response.data)
 
 
 if __name__ == "__main__":

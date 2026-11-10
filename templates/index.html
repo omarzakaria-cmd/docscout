@@ -71,6 +71,12 @@
       main { margin: 24px auto; }
       .search-bar { flex-direction: column; }
     }
+  mark {
+      background: #ffe08a;
+      color: #172033;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
   </style>
 </head>
 <body>
@@ -100,7 +106,7 @@
         <article>
           <h3>{{ filename }}</h3>
           <span class="meta">{% if filename.lower().endswith(".pdf") %}Page{% else %}Line{% endif %} {{ line_number }}</span>
-          <p>{{ text }}</p>
+          <p>{{ text | highlight_matches(query) }}</p>
         </article>
       {% else %}
         <div class="empty">

@@ -47,7 +47,7 @@ class WebTests(unittest.TestCase):
         self.assertIn(b"1 matching lines", response.data)
         self.assertIn(b"sample.txt", response.data)
         self.assertIn(b"Line 1", response.data)
-        self.assertIn(b"Learning Python", response.data)
+        self.assertIn(b"Learning <mark>Python</mark>", response.data)
 
     def test_no_matches_displays_message(self):
         response = self.client.get(
