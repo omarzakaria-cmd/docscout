@@ -7,7 +7,7 @@ A personal document search engine built with Python and Flask.
 - PDF search with page numbers
 - Case-insensitive word or phrase matching
 - Results with filenames, line numbers, and matching passages
-- Nine automated tests covering text search and the web interface
+- Fourteen automated tests covering text search, PDF extraction, PDF edge cases, and the web interface
 
 ## Setup
 Requires Python 3.9 or newer.
@@ -56,7 +56,6 @@ An HTML template displays the results.
 - Results are not ranked by relevance
 
 ## Planned improvements
-- Automated tests for PDF extraction
 - A searchable database index
 - Relevance ranking
 
