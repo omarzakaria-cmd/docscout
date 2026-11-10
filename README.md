@@ -6,7 +6,7 @@ A personal document search engine built with Python and Flask.
 - Browser interface and command-line search
 - Case-insensitive word or phrase matching
 - Results with filenames, line numbers, and matching passages
-- Automated tests for the search function
+- Eight automated tests covering search and the web interface
 
 ## Setup
 Requires Python 3.9 or newer.
@@ -53,7 +53,6 @@ An HTML template displays the results.
 - Results are not ranked by relevance
 
 ## Planned improvements
-- Tests for the web interface
 - PDF support
 - A searchable database index
 - Relevance ranking
