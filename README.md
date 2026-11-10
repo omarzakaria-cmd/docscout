@@ -1,29 +1,50 @@
 # DocScout
 
-A personal document search engine built with Python.
+A personal document search engine built with Python and Flask.
 
-## Current features
-- Search text files for a word or phrase
-- Match text regardless of capitalization
-- Display filenames, line numbers, and matching passages
-- Run multiple searches in one session
-- Handle unreadable files without stopping the search
+## Features
+- Browser interface and command-line search
+- Case-insensitive word or phrase matching
+- Results with filenames, line numbers, and matching passages
+- Eight automated tests covering search and the web interface
 
-## Run locally
-Requires Python 3.9 or newer. No external packages are required.
+## Setup
+Requires Python 3.9 or newer.
 
-```bash
-python3 main.py
+From the project folder, run these commands in order:
 
-```
+    python3 -m venv .venv
+    source .venv/bin/activate
+    python -m pip install -r requirements.txt
 
-The documents folder includes three sample text files.
-Try searching for `python` or `search`. Type `quit` to exit.
+## Run the website
+
+    python -m flask --app app run --port 5050
+
+Open http://127.0.0.1:5050 in your browser.
+Press Control+C in Terminal to stop the server.
+This server is for local development.
+
+## Command-line search
+
+    python3 main.py
+
+Type a word or phrase to search. Type quit to exit.
+The command-line version requires no external packages.
+
+## Sample documents
+Three sample text files are included in the documents folder.
+Try searching for python or search.
+
+## Run tests
+
+    python -m unittest -v
 
 ## How it works
-DocScout reads text files from the documents folder and checks each
-line for the search phrase. It returns each matching line with its
-filename and line number.
+Flask receives the search phrase from the browser and calls the
+same search function used by the command-line application.
+The function reads text files and returns matching lines.
+An HTML template displays the results.
 
 ## Current limitations
 - Supports text files only
@@ -34,5 +55,4 @@ filename and line number.
 ## Planned improvements
 - PDF support
 - A searchable database index
-- A web interface
-- Relevance ranking and automated tests
+- Relevance ranking
