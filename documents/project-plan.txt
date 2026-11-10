@@ -1,0 +1,3 @@
+DocScout is a personal document search engine.
+Our next features include PDF support and a web interface.
+Search results should show file names and matching lines.

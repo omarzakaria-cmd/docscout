@@ -1,0 +1,3 @@
+Prepare for interviews by practicing problem solving.
+Explain your projects and the decisions you made.
+Python dictionaries store key-value pairs.
