@@ -78,7 +78,7 @@
     <span class="badge">YOUR PERSONAL DOCUMENT SEARCH</span>
     <h1>Find it with DocScout.</h1>
     <p class="intro">
-      Search your text documents and see exactly where each match appears.
+      Search your text documents and PDFs to find matching passages.
     </p>
 
     <form method="get" action="/">
@@ -99,7 +99,7 @@
       {% for filename, line_number, text in results %}
         <article>
           <h3>{{ filename }}</h3>
-          <span class="meta">Line {{ line_number }}</span>
+          <span class="meta">{% if filename.lower().endswith(".pdf") %}Page{% else %}Line{% endif %} {{ line_number }}</span>
           <p>{{ text }}</p>
         </article>
       {% else %}

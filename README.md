@@ -4,9 +4,10 @@ A personal document search engine built with Python and Flask.
 
 ## Features
 - Browser interface and command-line search
+- PDF search with page numbers
 - Case-insensitive word or phrase matching
 - Results with filenames, line numbers, and matching passages
-- Eight automated tests covering search and the web interface
+- Nine automated tests covering text search and the web interface
 
 ## Setup
 Requires Python 3.9 or newer.
@@ -30,7 +31,7 @@ This server is for local development.
     python3 main.py
 
 Type a word or phrase to search. Type quit to exit.
-The command-line version requires no external packages.
+Both interfaces require the packages in requirements.txt.
 
 ## Sample documents
 Three sample text files are included in the documents folder.
@@ -47,12 +48,19 @@ The function reads text files and returns matching lines.
 An HTML template displays the results.
 
 ## Current limitations
-- Supports text files only
+- Supports text files and text-based PDFs
+- Scanned PDFs require OCR, which is not yet supported
+- Password-protected PDFs are skipped
 - Uses substring matching
 - Searches only the documents folder, without subfolders
 - Results are not ranked by relevance
 
 ## Planned improvements
-- PDF support
+- Automated tests for PDF extraction
 - A searchable database index
 - Relevance ranking
+
+## Search your own PDFs
+Copy a text-based PDF into the documents folder, then search for a word in it.
+PDF results show physical page numbers starting at 1.
+Local PDFs in this folder are excluded from Git by .gitignore.
