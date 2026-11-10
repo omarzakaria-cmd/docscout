@@ -1,5 +1,10 @@
 # DocScout
 
+[![Tests](https://github.com/omarzakaria-cmd/docscout/actions/workflows/tests.yml/badge.svg)](https://github.com/omarzakaria-cmd/docscout/actions/workflows/tests.yml)
+
+![DocScout showing highlighted search results](docs/images/search-demo.png)
+
+
 A personal document search engine built with Python and Flask.
 
 ## Features
@@ -69,3 +74,30 @@ The command-line interface reads source files directly.
 Copy a text-based PDF into the documents folder, then search for a word in it.
 PDF results show physical page numbers starting at 1.
 Local PDFs in this folder are excluded from Git by .gitignore.
+
+## Architecture
+
+    Text files and PDFs
+            |
+            v
+    Index builder and PDF extraction
+            |
+            v
+    SQLite FTS5 database
+            |
+            v
+    Flask web application
+            |
+            v
+    Ranked results with highlighted matches
+
+## Engineering decisions
+- SQLite FTS5 supports full-text search without a separate database server.
+- A separate indexing step avoids reopening PDFs for each browser search.
+- PDF extraction is shared by the index builder and command-line search.
+- Document text is escaped before highlight tags are added.
+- Tests use temporary documents and databases.
+- GitHub Actions runs the tests on pull requests and pushes to main.
+
+## Technology
+Python, Flask, SQLite FTS5, pypdf, HTML, CSS, unittest, and GitHub Actions.
