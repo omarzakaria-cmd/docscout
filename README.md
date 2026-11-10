@@ -7,7 +7,7 @@ A personal document search engine built with Python and Flask.
 - PDF search with page numbers
 - Case-insensitive word or phrase matching
 - Results with filenames, line numbers, and matching passages
-- Fourteen automated tests covering text search, PDF extraction, PDF edge cases, and the web interface
+- Twenty automated tests covering search, PDFs, the database, and the web interface
 
 ## Setup
 Requires Python 3.9 or newer.
@@ -17,6 +17,13 @@ From the project folder, run these commands in order:
     python3 -m venv .venv
     source .venv/bin/activate
     python -m pip install -r requirements.txt
+
+## Build or refresh the search index
+
+    python search_index.py
+
+Run this before your first browser search and whenever documents are added, edited, or removed.
+The local search.db database is excluded from Git.
 
 ## Run the website
 
@@ -42,22 +49,20 @@ Try searching for python or search.
     python -m unittest -v
 
 ## How it works
-Flask receives the search phrase from the browser and calls the
-same search function used by the command-line application.
-The function reads text files and returns matching lines.
-An HTML template displays the results.
+The index builder extracts passages from text files and PDFs into a local SQLite FTS5 database.
+The browser searches that stored text and ranks results using BM25.
+The command-line interface reads source files directly.
 
 ## Current limitations
 - Supports text files and text-based PDFs
 - Scanned PDFs require OCR, which is not yet supported
 - Password-protected PDFs are skipped
-- Uses substring matching
+- Browser search matches whole words and phrases
+- Command-line search uses substring matching
 - Searches only the documents folder, without subfolders
-- Results are not ranked by relevance
 
 ## Planned improvements
-- A searchable database index
-- Relevance ranking
+- Search result highlighting
 
 ## Search your own PDFs
 Copy a text-based PDF into the documents folder, then search for a word in it.

@@ -1,8 +1,23 @@
-from flask import Flask, render_template, request
+from pathlib import Path
 
-from main import search_documents
+from flask import Flask, abort, render_template, request
+
+from search_index import DATABASE_PATH, search_index
 
 app = Flask(__name__)
+app.config["DATABASE_PATH"] = DATABASE_PATH
+
+
+def search_documents(query):
+    database_path = app.config["DATABASE_PATH"]
+
+    if not Path(database_path).is_file():
+        abort(
+            503,
+            description="Search index missing. Run python search_index.py first.",
+        )
+
+    return search_index(query, database_path)
 
 
 @app.get("/")

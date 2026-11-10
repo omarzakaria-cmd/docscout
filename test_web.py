@@ -4,6 +4,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from app import app
+from search_index import build_index
 
 
 class WebTests(unittest.TestCase):
@@ -20,6 +21,12 @@ class WebTests(unittest.TestCase):
         patcher = patch("main.DOCUMENTS_DIR", documents)
         patcher.start()
         self.addCleanup(patcher.stop)
+
+        database_path = documents / "test.db"
+        build_index(documents, database_path)
+        config_patcher = patch.dict(app.config, {"DATABASE_PATH": database_path})
+        config_patcher.start()
+        self.addCleanup(config_patcher.stop)
 
         self.client = app.test_client()
 
