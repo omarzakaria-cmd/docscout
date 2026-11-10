@@ -4,12 +4,7 @@ from pypdf import PdfReader
 from pypdf.errors import PdfReadError
 
 
-def search_pdfs(query, documents_dir):
-    results = []
-
-    if not query.strip():
-        return results
-
+def iter_pdf_passages(documents_dir):
     files = sorted(
         path for path in Path(documents_dir).iterdir()
         if path.is_file() and path.suffix.lower() == ".pdf"
@@ -28,12 +23,19 @@ def search_pdfs(query, documents_dir):
                     text = page.extract_text() or ""
 
                     for line in text.splitlines():
-                        if query.casefold() in line.casefold():
-                            results.append(
-                                (file_path.name, page_number, line)
-                            )
+                        if line.strip():
+                            yield file_path.name, page_number, line
 
         except (OSError, PdfReadError, ValueError, NotImplementedError) as error:
             print(f"Could not read {file_path.name}: {error}")
 
-    return results
+
+def search_pdfs(query, documents_dir):
+    if not query.strip():
+        return []
+
+    return [
+        (filename, page_number, text)
+        for filename, page_number, text in iter_pdf_passages(documents_dir)
+        if query.casefold() in text.casefold()
+    ]

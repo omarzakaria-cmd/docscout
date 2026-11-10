@@ -6,3 +6,6 @@ __pycache__/
 
 # Local PDF documents
 documents/*.[pP][dD][fF]
+
+# Local search database
+/search.db*
