@@ -1,3 +1,4 @@
+from pdf_search import search_pdfs
 from pathlib import Path
 
 DOCUMENTS_DIR = Path(__file__).resolve().parent / "documents"
@@ -17,6 +18,7 @@ def search_documents(query):
             if query.casefold() in line.casefold():
                 results.append((file_path.name, line_number, line))
 
+    results.extend(search_pdfs(query, DOCUMENTS_DIR))
     return results
 
 
@@ -24,7 +26,7 @@ def main():
     DOCUMENTS_DIR.mkdir(exist_ok=True)
 
     print("\nWelcome to DocScout!")
-    print("Search your text documents. Type 'quit' to exit.")
+    print("Search your text documents and PDFs. Type 'quit' to exit.")
 
     while True:
         query = input("\nSearch: ").strip()
@@ -46,7 +48,8 @@ def main():
         print(f"\nFound {len(results)} matching lines:\n")
 
         for filename, line_number, line in results:
-            print(f"{filename} — line {line_number}")
+            label = "page" if filename.lower().endswith(".pdf") else "line"
+            print(f"{filename} — {label} {line_number}")
             print(f"  {line}\n")
 
 
