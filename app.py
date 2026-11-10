@@ -1,3 +1,4 @@
+from highlighting import highlight_matches
 from pathlib import Path
 
 from flask import Flask, abort, render_template, request
@@ -5,6 +6,7 @@ from flask import Flask, abort, render_template, request
 from search_index import DATABASE_PATH, search_index
 
 app = Flask(__name__)
+app.jinja_env.filters["highlight_matches"] = highlight_matches
 app.config["DATABASE_PATH"] = DATABASE_PATH
 
 
